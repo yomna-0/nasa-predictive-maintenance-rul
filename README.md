@@ -112,8 +112,8 @@ Commands to train, evaluate and run the demo will be added here when those modul
 
 | Member | Name | GitHub | Work package |
 |---|---|---|---|
-| 1 | _name_ | _RahmaAhmed_ | Data preprocessing |
-| 2 | _name_ | _yomna-0_ | Baseline models |
+| 1 | _Rahma Ahmed _ | __ | Data preprocessing |
+| 2 | _Yomna Ayman _ | _yomna-0_ | Baseline models |
 | 3 | _name_ | _@username_ | Neural Network model 1 |
 | 4 | _name_ | _@username_ | Neural Network models 2 and 3 |
 | 5 | _name_ | _@username_ | Experiments and optimization |
