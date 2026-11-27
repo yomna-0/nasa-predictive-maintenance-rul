@@ -36,7 +36,7 @@ The raw data is **not stored in this repository**. See [How to run](#6-how-to-ru
 
 ## 4\. Data preparation (leak-free)
 
-Implemented in `notebooks/02\_data\_preprocessing.ipynb`.
+Implemented in `src/data.py`, run from `notebooks/02\_data\_preprocessing.ipynb`.
 
 1. **Target:** `RUL = last cycle of the engine - current cycle` for each training row.
 2. **Split by engine:** 80 training engines / 20 validation engines (`GroupShuffleSplit`, seed 42). No engine appears in both sets, so no engine leaks across the split.
@@ -47,7 +47,7 @@ Implemented in `notebooks/02\_data\_preprocessing.ipynb`.
 
 ## 5\. Baseline results (test set, 100 engines)
 
-Implemented in `notebooks/BaselineModels.ipynb`. All three baselines use the flattened window (540 values). Hyperparameters were chosen on the validation set only.
+Implemented in `src/models.py` and `src/evaluate.py`, run from `notebooks/BaselineModels.ipynb`. All three baselines use the flattened window (540 values). Hyperparameters were chosen on the validation set only.
 
 |Model|RMSE|MAE|R2|NASA score|
 |-|-|-|-|-|
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 pip install jupyterlab
 ```
 
-1. **Get the data.** Download the FD001 files from the source above and put `PM\_train.csv`, `PM\_test.csv` and `PM\_truth.csv` in a folder named `data/` at the repository root.
+1. **Get the data.** Run `python data/download_data.py`. It downloads the FD001 files and writes `PM\_train.csv`, `PM\_test.csv` and `PM\_truth.csv` into `data/`.
 2. **Prepare the data.** Run all cells of `notebooks/02\_data\_preprocessing.ipynb`. It creates `prepared\_data.npz` next to the notebook.
 3. **Run the baselines.** Run all cells of `notebooks/BaselineModels.ipynb`. It reads `prepared\_data.npz` from the same folder and writes the result tables next to the notebook.
 
@@ -85,15 +85,22 @@ All random seeds are fixed (`42`).
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── src/                              shared project code (imported by the notebooks)
+│   ├── data.py                       loading, RUL, split, scaling, sequences
+│   ├── models.py                     baseline model builders
+│   └── evaluate.py                   RMSE, MAE, R2, NASA score
+├── configs/
+│   └── default.json                  seeds, window size, split, model settings
 ├── notebooks/
 │   ├── 02\_data\_preprocessing.ipynb   data preparation
 │   └── BaselineModels.ipynb          trivial, Ridge and Random Forest baselines
 ├── experiments/
 │   └── baseline\_results.csv          baseline results (validation and test)
+├── models/                           fitted artifacts (e.g. scaler.joblib, not in git)
 ├── report/
 │   └── section\_baselines.md          report section: baselines
-├── data/                             raw data goes here (not in git)
-├── configs/  src/  models/  app/     planned
+├── data/
+│   └── download\_data.py              downloads FD001 and writes the PM\_*.csv files
 ```
 
 ## 8\. Project status
