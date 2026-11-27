@@ -1,0 +1,7 @@
+Model,Split,RMSE,MAE,R2,NASA Score,Train Time (s)
+Trivial (Mean RUL),Validation,54.2698,48.7012,-0.0985,13069.7061,0.0012
+Trivial (Mean RUL),Test,45.7905,36.6155,-0.2142,73242.8922,0.0012
+Ridge Regression,Validation,26.4512,23.2794,0.739,422.7708,0.3529
+Ridge Regression,Test,26.1083,22.4197,0.6053,3199.7286,0.3529
+Random Forest,Validation,25.8065,20.5956,0.7516,431.335,26.6628
+Random Forest,Test,25.3043,18.9393,0.6292,4533.5788,26.6628
